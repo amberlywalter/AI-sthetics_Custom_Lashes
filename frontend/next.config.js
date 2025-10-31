@@ -1,4 +1,6 @@
-const res = await fetch("https://ai-sthetics-custom-lashes-backend.onrender.com", {
-  method: "POST",
-  body: formData,
-});
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+};
+
+export default nextConfig;
