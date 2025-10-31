@@ -25,19 +25,25 @@ export default function Home() {
       });
 
       const data = await res.json();
-if (data.error) {
-  setResult(`Error: ${data.error}`);
-} else {
-  const left = data.lash_fit_length_mm?.left_eye || "N/A";
-  const right = data.lash_fit_length_mm?.right_eye || "N/A";
 
-  setResult(
-    `Eye Shape: ${data.eye_shape || "N/A"}, 
-     Style: ${data.predicted_lash_style || "N/A"}, 
-     Left Lash Fit: ${left} mm, 
-     Right Lash Fit: ${right} mm`
-  );
-}
+      if (data.error) {
+        setResult(`Error: ${data.error}`);
+      } else {
+        const left = data.lash_fit_length_mm?.left_eye || "N/A";
+        const right = data.lash_fit_length_mm?.right_eye || "N/A";
+
+        setResult(
+          `Eye Shape: ${data.eye_shape || "N/A"}, 
+           Style: ${data.predicted_lash_style || "N/A"}, 
+           Left Lash Fit: ${left} mm, 
+           Right Lash Fit: ${right} mm`
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      setResult("Error connecting to backend.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-white text-gray-900 flex flex-col items-center justify-center px-6">
