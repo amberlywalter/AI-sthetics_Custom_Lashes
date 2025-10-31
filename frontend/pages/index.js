@@ -19,7 +19,7 @@ export default function Home() {
     formData.append("file", selectedFile);
 
     try {
-      const res = await fetch("https://ai-sthetics-custom-lashes-backend.onrender.com/analyze", {
+      const res = await fetch("https://ai-sthetics-custom-lashes-backend.onrender.com/analyze_lash/", {
         method: "POST",
         body: formData,
       });
