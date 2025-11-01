@@ -5,3 +5,11 @@ body {
   background-color: #fff;
   color: #333;
 }
+@media (max-width: 640px) {
+  h1 {
+    font-size: 2rem;
+  }
+  input[type="file"] {
+    width: 100%;
+  }
+}
