@@ -1,15 +1,34 @@
-/* frontend/styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600&family=Playfair+Display:wght@500&display=swap');
+
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #fff;
+  font-family: 'Poppins', sans-serif;
+  background-color: #FAFAFA;
   color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-@media (max-width: 640px) {
-  h1 {
-    font-size: 2rem;
-  }
-  input[type="file"] {
-    width: 100%;
-  }
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  color: #171717;
+}
+
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+input[type="file"] {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  border: 1px solid #E5E5E5;
+  border-radius: 8px;
+  padding: 6px;
+  cursor: pointer;
+  background-color: white;
 }
