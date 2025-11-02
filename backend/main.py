@@ -25,7 +25,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",                 # local dev
-        "https://ai-sthetics-custom-lashes.vercel.app",      # <-- replace with your real Vercel URL
+        "https://ai-sthetics-custom-lashes.vercel.app/",      # <-- replace with your real Vercel URL
     ],
     allow_credentials=True,
     allow_methods=["*"],
