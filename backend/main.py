@@ -19,15 +19,16 @@ from ai.shape_analysis import analyze_eye_shape
 from ai.lash_recommendation import recommend_lash
 
 # -------------------- App & CORS --------------------
+
 app = FastAPI(title="AI-sthetics Lash Analyzer", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",                 # local dev
-        "https://ai-sthetics-custom-lashes.vercel.app/",      # <-- replace with your real Vercel URL
-        "https://*.vercel.app/", # wildcard for other previre builds
+        "http://localhost:3000",  # for local development
+        "https://ai-sthetics-custom-lashes.vercel.app",  # your production frontend
     ],
+    allow_origin_regex=r"https://.*\.vercel\.app",  # allows all Vercel previews
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
