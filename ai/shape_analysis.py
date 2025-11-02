@@ -1,19 +1,18 @@
 import math
 
-def analyze_eye_shape(face):
+def analyze_eye_shape(face, debug=False):
     """
     Enhanced eye shape analysis using MediaPipe landmarks.
-    Incorporates ratios, corner tilt, and eyelid openness for more accurate classification.
+    Incorporates ratios, corner tilt, and eyelid openness for better accuracy.
+    Includes optional debug logging for testing and calibration.
     """
 
     def dist(p1, p2):
         return math.sqrt((p1.x - p2.x)**2 + (p1.y - p2.y)**2)
 
-    # Landmarks
+    # Key landmarks
     left_outer, left_inner = face.landmark[33], face.landmark[133]
     right_inner, right_outer = face.landmark[362], face.landmark[263]
-
-    # Eye height points
     left_top, left_bottom = face.landmark[159], face.landmark[145]
     right_top, right_bottom = face.landmark[386], face.landmark[374]
 
@@ -33,7 +32,7 @@ def analyze_eye_shape(face):
     ratio = avg_width / avg_height if avg_height else 0
     ratio = round(ratio, 2)
     tilt_angle = abs((left_outer.y - left_inner.y) + (right_outer.y - right_inner.y)) / 2
-    tilt_angle = round(tilt_angle * 100, 2)  # simplified tilt proxy
+    tilt_angle = round(tilt_angle * 100, 2)  # normalized proxy
 
     # --- Shape classification logic ---
     if ratio < 2.0:
@@ -47,16 +46,34 @@ def analyze_eye_shape(face):
     else:
         shape = "Balanced Eyes"
 
-    # --- Lash fit lengths (scaled mm) ---
+    # --- Lash fit lengths ---
     lash_fit_left = round(left_width * scale, 1)
     lash_fit_right = round(right_width * scale, 1)
 
-    return {
+    result = {
         "eye_shape": shape,
         "ratio": ratio,
         "tilt_angle": tilt_angle,
         "scale": round(scale, 2),
-        "raw_widths": {"left_eye": round(left_width, 3), "right_eye": round(right_width, 3)},
-        "raw_heights": {"left_eye": round(left_height, 3), "right_eye": round(right_height, 3)},
-        "lash_fit_length_mm": {"left_eye": lash_fit_left, "right_eye": lash_fit_right},
+        "lash_fit_length_mm": {
+            "left_eye": lash_fit_left,
+            "right_eye": lash_fit_right
+        },
+        "raw_widths": {
+            "left_eye": round(left_width, 3),
+            "right_eye": round(right_width, 3),
+        },
+        "raw_heights": {
+            "left_eye": round(left_height, 3),
+            "right_eye": round(right_height, 3),
+        }
     }
+
+    # --- Debug output ---
+    if debug:
+        print("\n🧠 Debug Eye Analysis:")
+        for k, v in result.items():
+            print(f"  {k}: {v}")
+        print("-" * 40)
+
+    return result
