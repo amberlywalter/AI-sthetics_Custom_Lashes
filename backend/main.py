@@ -26,6 +26,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:3000",                 # local dev
         "https://ai-sthetics-custom-lashes.vercel.app/",      # <-- replace with your real Vercel URL
+        "https://*.vercel.app/", # wildcard for other previre builds
     ],
     allow_credentials=True,
     allow_methods=["*"],
